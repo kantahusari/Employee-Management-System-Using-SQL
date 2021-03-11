@@ -1,0 +1,56 @@
+i. Create a SELECT query that uses a condition in the WHERE Clause. 
+SELECT *
+FROM Employee
+WHERE Job_Title = "Software Engineer";
+
+ii. Create a SELECT query that joins any two tables through a Natural Join. 
+SELECT Employee.GBC_Number, JobTitles.Title
+FROM Employee
+NATURAL JOIN Employee_Previous_Job_Titles AS JobTitles;
+
+iii. Create a SELECT query that joins at least four tables 
+SELECT Department.Name, Skill.Name
+FROM Employee
+INNER JOIN Project ON Employee.ProjectID = Project.GBC_Number
+INNER JOIN Task ON Task.Project_ID = Project.GBC_Number
+INNER JOIN Skill ON Skill.Task_ID = Task.ID
+INNER JOIN Department ON Department.ID = Employee.Department;
+
+iv. Create a SELECT query that uses an Aggregate function.
+SELECT COUNT(Skill.Name) AS Skills
+FROM Employee
+INNER JOIN Project ON Employee.ProjectID = Project.GBC_Number
+INNER JOIN Task ON Task.Project_ID = Project.GBC_Number
+INNER JOIN Skill ON Skill.Task_ID = Task.ID;
+
+v. Create a SELECT query that includes an ORDER BY Clause.
+SELECT * FROM Project
+ORDER BY Name ASC;
+
+vi. Create a SELECT query that includes GROUP BY and HAVING Clauses.
+SELECT Name
+FROM Task
+GROUP BY ID
+HAVING Name LIKE "%Programmer%";
+
+
+vii. Create a VIEW that is based on at least THREE Tables. 
+CREATE VIEW GetEmployeeSkills AS (
+SELECT Employee.First_Name, COUNT(Skill.Name) AS Skills
+FROM Employee
+INNER JOIN Project ON Employee.ProjectID = Project.GBC_Number
+INNER JOIN Task ON Task.Project_ID = Project.GBC_Number
+INNER JOIN Skill ON Skill.Task_ID = Task.ID);
+
+SELECT * FROM GetEmployeeSkills;
+
+viii. Create a SELECT query that includes an OUTER JOIN
+SELECT * FROM Employee RIGHT OUTER JOIN Project ON ProjectID = Project.GBC_Number;
+
+
+ix. Create a SELECT query that includes a SUB QUERY. 
+SELECT * FROM Project WHERE Client_GBC IN (SELECT GBC_Number FROM Client WHERE Name LIKE "%John");
+
+
+x. Create a SELECT query that uses a SELF JOIN. 
+SELECT Spouse.First_Name, Spouse.Last_Name FROM Employee INNER JOIN Employee AS Spouse ON Employee.Spouse = Spouse.GBC_Number;
